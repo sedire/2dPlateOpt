@@ -17,29 +17,14 @@ using std::bad_alloc;
 using std::complex;
 using namespace Eigen;
 
-//class SolInfo
-//{
-//public:
-//	SolInfo();
-//	~SolInfo();
-//
-//	vector<PL_NUM> o;		//omega matrix to restore the solution
-//
-//	void setup( int _varNum );
-//	void flushO();
-//};
-
 class OrthoBuilder
 {
 public:
-	//vector<SolInfo> solInfoMap;
 	OrthoBuilder( int _varNum, int Km );
 	virtual ~OrthoBuilder();
-	virtual void setParams();
 	virtual void orthonorm( int y, PL_NUM NtoOrt[EQ_NUM * NUMBER_OF_LINES / 2 + 1][EQ_NUM * NUMBER_OF_LINES] ) {};	//this version should orthonorm all 
 	virtual void orthonorm( int y, Matrix<PL_NUM, EQ_NUM * NUMBER_OF_LINES, EQ_NUM * NUMBER_OF_LINES / 2 + 1>* NtoOrt ) {};	//this version should orthonorm all 
 	virtual void buildSolution( vector<VarVect>* _mesh ) {};
-	//virtual void flushO( int x );
 	virtual void setOmegasZero();
 	virtual void setInitVects( const vector<PL_NUM>& N1, const vector<PL_NUM>& N2, const vector<PL_NUM>& N3, const vector<PL_NUM>& N4, const vector<PL_NUM>& N5 );
 	virtual void setOrthoDoneInfo( int y );

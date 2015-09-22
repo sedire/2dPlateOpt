@@ -1,21 +1,5 @@
 #include "OrthoBuilder.h"
 
-//SolInfo::SolInfo() {}
-//SolInfo::~SolInfo() {}
-
-//void SolInfo::setup( int _varNum )
-//{
-//	o.resize( ( _varNum / 2 + 1 ) * ( _varNum / 2 + 2 ) / 2, 0.0 );		//the matrix is upper triangular. such size is to store less
-//}
-//
-//void SolInfo::flushO()
-//{
-//	for( int i = 0; i < o.size(); ++i )
-//	{
-//		o[i] = 0.0;
-//	}
-//}
-
 OrthoBuilder::~OrthoBuilder() 
 { 
 	delete[] zi; 
@@ -32,6 +16,7 @@ OrthoBuilder::OrthoBuilder( const int _varNum, const int _Km ) :
 		zi[i] = Matrix<PL_NUM, Dynamic, Dynamic>::Zero( _varNum, _varNum / 2 + 1 );
 	}
 	omega.resize( _Km, vector<PL_NUM>( ( _varNum / 2 + 1 ) * ( _varNum / 2 + 2 ) / 2, 0.0 ) );
+	orthoDone.resize( Km - 1, 0 );
 }
 
 OrthoBuilderGSh::OrthoBuilderGSh( int _varNum, int _Km ) :
@@ -39,11 +24,6 @@ OrthoBuilderGSh::OrthoBuilderGSh( int _varNum, int _Km ) :
 {
 
 }
-
-//void OrthoBuilder::flushO( int x )
-//{
-//	solInfoMap[x].flushO();
-//}
 
 void OrthoBuilder::setOmegasZero()
 {
@@ -54,25 +34,6 @@ void OrthoBuilder::setOmegasZero()
 			omega[i][j] = 0.0;
 		}
 	}
-}
-
-void OrthoBuilder::setParams()
-{
-	//try 
-	//{
-	//	solInfoMap.resize( Km );
-	//	for( int i = 0; i < solInfoMap.size(); ++i )
-	//	{
-	//		solInfoMap[i].setup( varNum );
-	//	}
-	//}
-	//catch( bad_alloc &ba )
-	//{
-	//	cout << ba.what() << endl;
-	//	std::abort();
-	//}
-
-	orthoDone.resize( Km - 1, 0 );
 }
 
 void OrthoBuilder::setInitVects( const vector<PL_NUM>& N1, const vector<PL_NUM>& N2, const vector<PL_NUM>& N3, const vector<PL_NUM>& N4, const vector<PL_NUM>& N5 )

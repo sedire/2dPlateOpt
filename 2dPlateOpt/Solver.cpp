@@ -75,15 +75,14 @@ Solver::Solver():
 
 Solver::~Solver()
 {
-	//if( rungeKutta != 0 )
-	//{
-	//	delete( rungeKutta );
-	//}
 	if( orthoBuilder != 0 )
 	{
 		delete( orthoBuilder );
 	}
-	delete[] Phi;
+	if( Phi != 0 )
+	{
+		delete[] Phi;
+	}
 }
 
 PL_NUM Solver::increaseTime()
@@ -134,7 +133,6 @@ void Solver::setTask()
 	rgkD41 = 1.0 - rgkD42 - rgkD43;
 
 	orthoBuilder = new OrthoBuilderGSh( varNum, Km );
-	orthoBuilder->setParams();			//NOTE: it takes a lot of time to initialize so much memory
 
 	mesh.resize( Km );
 	for( int i = 0; i < mesh.size(); ++i ){
@@ -1485,11 +1483,6 @@ void Solver::walkthrough( int mode )	//sequential version
 	orthoBuilder->buildSolution( &mesh );
 
 	orthoBuilder->setOmegasZero();
-
-	/*for( int _x = 0; _x < Km; ++_x )
-	{
-		orthoBuilder->flushO( _x );
-	}*/
 }
 
 
