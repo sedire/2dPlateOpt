@@ -3,6 +3,8 @@
 #include "Solver.h"
 #include <omp.h>
 #include <time.h>
+#include "hyperDual.h"
+#include <Eigen/Eigen>
 
 using std::cout;
 using std::endl;
@@ -10,13 +12,31 @@ using std::endl;
 int main()
 {
 	cout << "hello\n";
-
-	//omp_set_num_threads( NUM_OF_THREADS );
 	
 	time_t beginTime;
 	time_t endTime;
 
-	Solver* solver = new Solver();
+	//Matrix<HPD<double, 3>, 3, 1> v1;
+	//Matrix<HPD<double, 3>, 3, 1> v2;
+
+	//HPD<double, 3> a1, a2, a3, a4, a5, a6;
+	//a1 = 1.0;
+	//a1.elems[1] = 1.0;
+	//a2 = 2.0;
+	//a2.elems[2] = 1.0;
+	//a3 = 3.0;
+	//a3.elems[3] = 1.0;
+	//a4 = 4.0;
+	//a4.elems[1] = 0.5;
+	//a5 = 5.0;
+	//a5.elems[2] = 2.0;
+	//a6 = 6.0;
+	//a6.elems[3] = 3.0;
+
+	//v1 << a1, a2, a3;
+	//v2 << a4, a5, a6;
+
+	Solver<HPD<N_PRES, 1> >* solver = new Solver<HPD<N_PRES, 1> >();
 
 	cout << "\n doing pre_step...\n";
 	beginTime = time( 0 );

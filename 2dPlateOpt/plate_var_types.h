@@ -3,7 +3,8 @@
 
 #define _USE_MATH_DEFINES
 
-#define PL_NUM long double
+#define N_PRES double
+//#define PL_NUM long double
 #define EQ_NUM 10
 #define NUMBER_OF_LINES 15
 #define NODES_ON_Y 6001
@@ -13,7 +14,6 @@
 #define EPS_W 0.0000000000000000000000001
 #define ORTHONORM_CHECK_EPS 1e-8
 #define _MMM_PI 3.14159265
-#define NUM_OF_THREADS 1
 #define ABM_STAGE_NUM 4
 
 #endif
