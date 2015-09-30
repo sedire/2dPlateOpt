@@ -16,4 +16,7 @@
 #define _MMM_PI 3.14159265
 #define ABM_STAGE_NUM 4
 
+enum {stressWhole, stressSin, stressCentered};
+enum {currentConst, currentSin, currentExpSin, currentPieceLin};
+
 #endif

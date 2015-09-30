@@ -7,6 +7,7 @@
 #include <vector>
 #include <fstream>
 #include "omp.h"
+#include "hyperDual.h"
 #include <Eigen/Eigen>
 
 using std::cout;
@@ -35,7 +36,7 @@ public:
 									//const Matrix<N_PRES, EQ_NUM * NUMBER_OF_LINES, EQ_NUM * NUMBER_OF_LINES / 2 + 1>& vectSetOrtho,
 									const Matrix<PL_NUM, EQ_NUM * NUMBER_OF_LINES, EQ_NUM * NUMBER_OF_LINES / 2 + 1>& vectSetOrig ) { return 1; };
 
-	inline N_PRES getInfNorm( PL_NUM* vect, int vectSize );
+	N_PRES getInfNorm( PL_NUM* vect, int vectSize );
 	Matrix<PL_NUM, Dynamic, Dynamic>* zi;
 protected:
 	const int varNum;
@@ -49,6 +50,9 @@ protected:
 private:
 	OrthoBuilder();
 };
+
+template <>
+N_PRES OrthoBuilder<HPD<N_PRES, 2> >::getInfNorm( HPD<N_PRES, 2>* vect, int vectSize );
 
 template <class PL_NUM>
 class OrthoBuilderGSh : public OrthoBuilder<PL_NUM>			//use this
@@ -137,16 +141,16 @@ inline void OrthoBuilderGSh<PL_NUM>::setNextSolVects( int n, const PL_NUM decomp
 }
 
 template <class PL_NUM>
-inline N_PRES OrthoBuilder<PL_NUM>::getInfNorm( PL_NUM* vect, int vectSize )
+N_PRES OrthoBuilder<PL_NUM>::getInfNorm( PL_NUM* vect, int vectSize )
 {
 	if( vect != 0 )
 	{
-		N_PRES ret = fabs( vect[0].real() );
+		N_PRES ret = fabs( vect[0] );
 		for( int i = 1; i < vectSize; ++i )
 		{
-			if( fabs( vect[i].real() ) > ret )
+			if( fabs( vect[i] ) > ret )
 			{
-				ret = fabs( vect[i].real() );
+				ret = fabs( vect[i] );
 			}
 		}
 		return ret;
