@@ -369,7 +369,7 @@ void OrthoBuilderGSh<PL_NUM>::buildSolution( vector<VarVect<PL_NUM> >* _mesh )
 		ndx2 = dx1.lpNorm<Infinity>();
 		temp = ndx2;
 	} while( ndx2 < 0.9 * ndx && ndx2 / nx >= 2 * EPS_W );
-	cout << " " << iterCount << " refnmt iterations\n";
+	//cout << " " << iterCount << " refnmt iterations\n";
 	//cout << " refnmt relative error is " << (N_PRES)( ( M * x1 - f11 ).norm() / f11.norm() ) << endl;
 	//refinement is over
 

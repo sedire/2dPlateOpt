@@ -1735,9 +1735,9 @@ void Solver<PL_NUM>::walkthrough( int mode )	//sequential version
 
 	}
 
-	cout << " == rgkT \t" << rgkT << endl;
-	cout << " == orthoT \t" << orthoT << endl;
-	cout << " == rgk to total ratio: " << ( float )totalRgkSteps / ( float )( Km - 1 ) << endl;
+	//cout << " == rgkT \t" << rgkT << endl;
+	//cout << " == orthoT \t" << orthoT << endl;
+	//cout << " == rgk to total ratio: " << ( float )totalRgkSteps / ( float )( Km - 1 ) << endl;
 
 	orthoBuilder->buildSolution( &mesh );
 
@@ -1785,7 +1785,7 @@ PL_NUM Solver<PL_NUM>::do_step()
 	int cont = 1;
 	while( cont == 1 )
 	{
-		cout << " = walk\n";
+		//cout << " = walk\n";
 		calcNewmarkAB( 0, 1 );
 
 		orthoBuilder->zi[0] = Matrix<PL_NUM, Dynamic, Dynamic>::Zero( EQ_NUM * NUMBER_OF_LINES, EQ_NUM * NUMBER_OF_LINES / 2 + 1 );
@@ -1843,7 +1843,7 @@ int Solver<PL_NUM>::checkConv()
 			{
 				if( fabs( ( mesh[x].Nk1[i] - mesh[x].Nk[i] ) / mesh[x].Nk[i] ) < ALMOST_ZERO )
 				{
-					cout << " divergence " << x << " " << i << " " << fabs( ( mesh[x].Nk1[i] - mesh[x].Nk[i] ) / mesh[x].Nk[i] ) << " delta is " << ALMOST_ZERO << endl;
+					//cout << " divergence " << x << " " << i << " " << fabs( ( mesh[x].Nk1[i] - mesh[x].Nk[i] ) / mesh[x].Nk[i] ) << " delta is " << ALMOST_ZERO << endl;
 					return 0;
 				}
 			}
@@ -1851,7 +1851,7 @@ int Solver<PL_NUM>::checkConv()
 			{
 				if( fabs( mesh[x].Nk1[i] ) < ALMOST_ZERO )
 				{
-					cout << " divergence " << x << " " << i << " " << fabs( mesh[x].Nk1[i] ) << " delta is " << ALMOST_ZERO << endl;
+					//cout << " divergence " << x << " " << i << " " << fabs( mesh[x].Nk1[i] ) << " delta is " << ALMOST_ZERO << endl;
 					return 0;
 				}
 			}
